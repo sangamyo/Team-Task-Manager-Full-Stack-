@@ -1,0 +1,26 @@
+{
+  "name": "quantum-team-task-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Production-ready futuristic full-stack Team Task Manager SaaS.",
+  "workspaces": [
+    "web",
+    "api"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace web",
+    "dev:web": "npm run dev --workspace web",
+    "dev:api": "npm run dev --workspace api",
+    "build": "npm run build --workspace web",
+    "lint": "npm run lint --workspace web",
+    "start": "npm run start --workspace web"
+  },
+  "keywords": [
+    "nextjs",
+    "threejs",
+    "saas",
+    "task-manager"
+  ],
+  "author": "",
+  "license": "MIT"
+}
