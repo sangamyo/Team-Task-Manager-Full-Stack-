@@ -10,7 +10,35 @@ Quantum Teams is a recruiter-ready full-stack team task manager: a futuristic Ne
 - JWT authentication, role middleware, Zod validation, Helmet, CORS, rate limiting
 - Railway-ready monorepo structure
 
-## Features
+## 📁 Folder Structure
+
+This project follows a professional Monorepo structure, cleanly separating the client and server applications.
+
+```text
+Quantum Teams/
+├── api/                      # 🛠️ Backend (Node.js + Express)
+│   ├── src/
+│   │   ├── controllers/      # API business logic
+│   │   ├── middleware/       # JWT Auth & error handling
+│   │   ├── models/           # MongoDB Mongoose schemas
+│   │   ├── routes/           # Express API endpoints
+│   │   └── server.js         # Entry point
+│   ├── .env.example          # Backend environment variables
+│   └── package.json
+│
+├── web/                      # 🖥️ Frontend (Next.js + React)
+│   ├── src/
+│   │   ├── app/              # Next.js App Router pages
+│   │   ├── components/       # Reusable 3D & UI components
+│   │   └── lib/              # Types, Zustand store, Utils
+│   ├── .env.example          # Frontend environment variables
+│   ├── next.config.ts        # Next.js configuration
+│   └── package.json
+│
+└── README.md                 # Project documentation
+```
+
+## ✨ Features
 
 - Landing page with immersive 3D product demo
 - 3D login, signup, and forgot password UI
