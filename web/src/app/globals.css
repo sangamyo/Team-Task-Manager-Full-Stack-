@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #040712;
@@ -10,11 +12,6 @@
   --blue: #38bdf8;
   --fuchsia: #d946ef;
   --emerald: #34d399;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
 }
 
 /* ── Base ─────────────────────────────────────────────────────── */
