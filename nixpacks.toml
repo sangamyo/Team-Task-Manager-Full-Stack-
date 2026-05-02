@@ -1,0 +1,17 @@
+# Root Nixpacks configuration for monorepo
+# Forces Node.js 20.17.1 for both frontend and backend workspaces
+
+[languages]
+nodes = ["20.17.1"]
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build --workspace=web"]
+
+[start]
+cmd = "npm run start --workspace=web"
