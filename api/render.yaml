@@ -1,0 +1,10 @@
+[buildCommand]
+# Build command - install dependencies
+cmd = "npm install"
+
+[startCommand]
+# Start command - run the backend server
+cmd = "npm start"
+
+# Specify Node.js version explicitly
+nodeVersion = "20.17.1"
