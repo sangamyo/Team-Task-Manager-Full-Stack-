@@ -16,7 +16,7 @@ export const app = express();
 // Security and middleware
 app.use(helmet());
 
-// CORS Configuration - Support multiple frontends
+// CORS Configuration - Support multiple frontends (localhost, Vercel, Railway)
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
@@ -26,7 +26,10 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || origin.endsWith("vercel.app")) {
+    if (!origin || 
+        allowedOrigins.includes(origin) || 
+        origin.endsWith("vercel.app") || 
+        origin.endsWith("railway.app")) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
