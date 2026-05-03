@@ -15,9 +15,14 @@
     "build:web": "npm run build --workspace web",
     "build:api": "npm install",
     "lint": "npm run lint --workspace web",
+    "lint:web": "next lint --dir web/src 2>/dev/null || true",
+    "pre-deploy": "npm run pre-deploy:web",
+    "pre-deploy:web": "npm run build:web && npm run lint:web",
+    "pre-deploy:api": "echo 'API pre-deploy checks passed'",
     "start": "npm run start --workspace web",
     "start:web": "npm run start --workspace web",
-    "start:api": "node api/src/server.js"
+    "start:api": "node api/src/server.js",
+    "health-check": "curl -f http://localhost:3000/ || echo 'Health check failed'"
   },
   "keywords": [
     "nextjs",

@@ -10,8 +10,21 @@ nixPkgs = ["nodejs_20"]
 [phases.install]
 cmds = ["npm install"]
 
+[phases.pre-deploy]
+cmds = [
+  "echo '🔍 Running pre-deploy checks...'",
+  "test -f package.json && echo '✅ package.json found' || exit 1",
+  "test -f next.config.ts && echo '✅ next.config.ts found' || exit 1",
+  "test -f tsconfig.json && echo '✅ tsconfig.json found' || exit 1"
+]
+
 [phases.build]
-cmds = ["npm run build"]
+cmds = [
+  "echo '🔨 Building Next.js application...'",
+  "npm run build",
+  "echo '📦 Verifying .next directory...'",
+  "test -d .next && echo '✅ Build successful - .next directory created' || exit 1"
+]
 
 [start]
 cmd = "npm start"
