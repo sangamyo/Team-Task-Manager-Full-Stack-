@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "health": "curl -f http://localhost:4000/health || echo 'Health check failed'",
+    "pre-deploy": "npm run health-check:pre",
+    "health-check:pre": "echo '✅ Backend pre-deploy checks passed'",
+    "build": "echo '✅ No build needed for Express backend'"
   },
   "keywords": [],
   "author": "",

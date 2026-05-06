@@ -8,10 +8,23 @@ nodes = ["20.17.1"]
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm install --legacy-peer-deps"]
+cmds = ["npm install"]
+
+[phases.pre-deploy]
+cmds = [
+  "echo '🔍 Running backend pre-deploy checks...'",
+  "test -f package.json && echo '✅ package.json found' || exit 1",
+  "test -f src/server.js && echo '✅ src/server.js found' || exit 1",
+  "test -f src/config/db.js && echo '✅ MongoDB config found' || exit 1",
+  "echo '✅ All pre-deploy checks passed'"
+]
 
 [phases.build]
-cmds = ["npm run build 2>/dev/null || echo 'No build script defined'"]
+cmds = [
+  "echo '📦 Backend build phase (no compilation needed)'",
+  "npm run build",
+  "echo '✅ Backend ready for deployment'"
+]
 
 [start]
 cmd = "npm start"

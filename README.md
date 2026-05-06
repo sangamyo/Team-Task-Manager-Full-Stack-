@@ -145,9 +145,16 @@ Create two Railway services from this repo:
 
 2. API service
    - Root directory: `api`
-   - Start command: `npm run start`
+   - Builder: `Nixpacks`
+   - Build command: `npm install --omit=dev && npm run build`
+   - Start command: `npm start`
+   - Health check path: `/health`
    - Env: values from `api/.env.example`
    - Add MongoDB Atlas or Railway MongoDB-compatible connection string as `MONGODB_URI`
+   - Set `CLIENT_URL` to your frontend URL, for example `https://your-frontend.vercel.app`
+
+Backend deploy note:
+If Railway says the backend is failing during startup, the most common cause is an invalid `MONGODB_URI`. A bad username, password, or database network rule will fail the API before the health check passes.
 
 ## Production Notes
 
