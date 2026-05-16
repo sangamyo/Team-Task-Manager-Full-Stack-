@@ -82,33 +82,34 @@ export function ProjectModal({ open, onClose, editing }: Props) {
               className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
             />
 
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="glass-panel fixed left-1/2 top-1/2 z-[100] max-h-[90vh] w-[min(calc(100vw-2rem),32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(34,211,238,0.15)] sm:w-[min(calc(100vw-3rem),32rem)] sm:p-6"
-            >
-            {/* Header */}
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="grid size-10 place-items-center rounded-2xl bg-cyan-300/10">
-                  <FolderPlus className="size-5 text-cyan-200" />
-                </div>
-                <h2 className="text-xl font-semibold">
-                  {editing ? "Edit Project" : "New Project"}
-                </h2>
-              </div>
-              <button
-                onClick={onClose}
-                className="grid size-9 place-items-center rounded-full border border-white/10 text-slate-400 hover:border-cyan-300/30 hover:text-white transition"
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+              {/* Modal */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="glass-panel relative max-h-full w-full max-w-lg overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(34,211,238,0.15)] sm:p-6"
               >
-                <X className="size-4" />
-              </button>
-            </div>
+                {/* Header */}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="grid size-10 place-items-center rounded-2xl bg-cyan-300/10">
+                      <FolderPlus className="size-5 text-cyan-200" />
+                    </div>
+                    <h2 className="text-xl font-semibold">
+                      {editing ? "Edit Project" : "New Project"}
+                    </h2>
+                  </div>
+                  <button
+                    onClick={onClose}
+                    className="grid size-9 place-items-center rounded-full border border-white/10 text-slate-400 hover:border-cyan-300/30 hover:text-white transition"
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 pb-1">
+                <form onSubmit={handleSubmit} className="space-y-4 pb-1">
               {!isAdmin && (
                 <p className="flex items-center gap-2 rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
                   <AlertCircle className="size-4" /> Members can view assigned projects only.
@@ -216,8 +217,9 @@ export function ProjectModal({ open, onClose, editing }: Props) {
                   {submitting ? "Saving..." : editing ? "Save Changes" : "Create Project"}
                 </button>
               </div>
-            </form>
-            </motion.div>
+                </form>
+              </motion.div>
+            </div>
           </>
         </ModalPortal>
       )}

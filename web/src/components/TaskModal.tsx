@@ -90,26 +90,27 @@ export function TaskModal({ open, onClose, projectId, editing }: Props) {
               onClick={onClose}
               className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
             />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="glass-panel fixed left-1/2 top-1/2 z-[100] max-h-[90vh] w-[min(calc(100vw-2rem),32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(139,92,246,0.15)] sm:w-[min(calc(100vw-3rem),32rem)] sm:p-6"
-            >
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="grid size-10 place-items-center rounded-2xl bg-violet-300/10">
-                  <CheckSquare className="size-5 text-violet-200" />
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="glass-panel relative max-h-full w-full max-w-lg overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(139,92,246,0.15)] sm:p-6"
+              >
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="grid size-10 place-items-center rounded-2xl bg-violet-300/10">
+                      <CheckSquare className="size-5 text-violet-200" />
+                    </div>
+                    <h2 className="text-xl font-semibold">{editing ? "Edit Task" : "Add Task"}</h2>
+                  </div>
+                  <button onClick={onClose} className="grid size-9 place-items-center rounded-full border border-white/10 text-slate-400 hover:text-white transition">
+                    <X className="size-4" />
+                  </button>
                 </div>
-                <h2 className="text-xl font-semibold">{editing ? "Edit Task" : "Add Task"}</h2>
-              </div>
-              <button onClick={onClose} className="grid size-9 place-items-center rounded-full border border-white/10 text-slate-400 hover:text-white transition">
-                <X className="size-4" />
-              </button>
-            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 pb-1">
+                <form onSubmit={handleSubmit} className="space-y-4 pb-1">
               <label className="block">
                 <span className="mb-1.5 block text-sm text-slate-300">Task Title *</span>
                 <div className="flex items-center gap-3 rounded-2xl border border-violet-200/15 bg-white/[0.04] px-4 py-3 focus-within:border-violet-300/50 transition">
@@ -207,8 +208,9 @@ export function TaskModal({ open, onClose, projectId, editing }: Props) {
                   {submitting ? "Saving..." : editing ? "Save Changes" : "Add Task"}
                 </button>
               </div>
-            </form>
-            </motion.div>
+                </form>
+              </motion.div>
+            </div>
           </>
         </ModalPortal>
       )}
