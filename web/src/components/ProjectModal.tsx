@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, FolderPlus, Calendar, Users, AlignLeft, Tag, AlertCircle } from "lucide-react";
 import { useApp } from "@/lib/store";
 import type { Health, Project } from "@/lib/types";
+import { ModalPortal } from "@/components/ModalPortal";
 
 const HEALTH_OPTIONS: Health[] = ["Elite", "On Track", "Needs Focus", "At Risk"];
 
@@ -70,24 +71,25 @@ export function ProjectModal({ open, onClose, editing }: Props) {
   return (
     <AnimatePresence>
       {open && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
-          />
+        <ModalPortal>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onClose}
+              className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
+            />
 
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="glass-panel fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[min(100%-2rem,32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(34,211,238,0.15)] sm:p-6"
-          >
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="glass-panel fixed left-1/2 top-1/2 z-[100] max-h-[90vh] w-[min(calc(100vw-2rem),32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(34,211,238,0.15)] sm:w-[min(calc(100vw-3rem),32rem)] sm:p-6"
+            >
             {/* Header */}
             <div className="mb-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -215,8 +217,9 @@ export function ProjectModal({ open, onClose, editing }: Props) {
                 </button>
               </div>
             </form>
-          </motion.div>
-        </>
+            </motion.div>
+          </>
+        </ModalPortal>
       )}
     </AnimatePresence>
   );

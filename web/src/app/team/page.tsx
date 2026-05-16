@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, Edit3, Mail, ShieldCheck, UserPlus, X } from "lucide-react";
 import { useApp } from "@/lib/store";
 import type { Member } from "@/lib/types";
+import { ModalPortal } from "@/components/ModalPortal";
 
 const COLOR_OPTIONS = ["cyan", "violet", "emerald", "sky", "fuchsia", "amber"];
 const colorMap: Record<string, string> = {
@@ -64,14 +65,15 @@ function MemberModal({ open, onClose, editing }: { open: boolean; onClose: () =>
   return (
     <AnimatePresence>
       {open && (
-        <>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
-          <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[min(100%-2rem,28rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 sm:p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-xl font-semibold">{editing ? "Edit Member" : "Invite Member"}</h2>
-              <button onClick={onClose} className="grid size-8 place-items-center rounded-full border border-white/10 text-slate-400 hover:text-white transition"><X className="size-4" /></button>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-4 pb-1">
+        <ModalPortal>
+          <>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm" />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} className="glass-panel fixed left-1/2 top-1/2 z-[100] max-h-[90vh] w-[min(calc(100vw-2rem),28rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 sm:w-[min(calc(100vw-3rem),28rem)] sm:p-6">
+              <div className="mb-5 flex items-center justify-between">
+                <h2 className="text-xl font-semibold">{editing ? "Edit Member" : "Invite Member"}</h2>
+                <button onClick={onClose} className="grid size-8 place-items-center rounded-full border border-white/10 text-slate-400 hover:text-white transition"><X className="size-4" /></button>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-4 pb-1">
               <label className="block">
                 <span className="mb-1.5 block text-sm text-slate-300">Full Name *</span>
                 <input value={name} onChange={(e) => setName(e.target.value)} required className="w-full rounded-2xl border border-cyan-200/15 bg-white/[0.04] px-4 py-3 text-sm outline-none placeholder:text-slate-500 focus:border-cyan-300/50 transition" placeholder="e.g. Sarah Chen" />
@@ -112,9 +114,10 @@ function MemberModal({ open, onClose, editing }: { open: boolean; onClose: () =>
                 <button type="button" onClick={onClose} className="rounded-full border border-white/10 px-5 py-2.5 text-sm text-slate-300 hover:text-white transition">Cancel</button>
                 <button type="submit" disabled={submitting} className="magnetic rounded-full bg-gradient-to-r from-cyan-300 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950">{submitting ? "Saving..." : editing ? "Save Changes" : "Invite Member"}</button>
               </div>
-            </form>
-          </motion.div>
-        </>
+              </form>
+            </motion.div>
+          </>
+        </ModalPortal>
       )}
     </AnimatePresence>
   );
