@@ -2,7 +2,7 @@
 # This ensures Node.js 20.x and proper build steps
 
 [languages]
-nodes = ["20.17.1"]
+nodes = ["20.19.0"]
 
 [phases.setup]
 nixPkgs = ["nodejs_20"]
