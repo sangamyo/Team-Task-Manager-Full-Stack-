@@ -93,7 +93,7 @@ export function TaskModal({ open, onClose, projectId, editing }: Props) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="glass-panel fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-3xl p-6 shadow-[0_0_80px_rgba(139,92,246,0.15)]"
+            className="glass-panel fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[min(100%-2rem,32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(139,92,246,0.15)] sm:p-6"
           >
             <div className="mb-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -107,7 +107,7 @@ export function TaskModal({ open, onClose, projectId, editing }: Props) {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 pb-1">
               <label className="block">
                 <span className="mb-1.5 block text-sm text-slate-300">Task Title *</span>
                 <div className="flex items-center gap-3 rounded-2xl border border-violet-200/15 bg-white/[0.04] px-4 py-3 focus-within:border-violet-300/50 transition">

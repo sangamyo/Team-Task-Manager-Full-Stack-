@@ -7,7 +7,7 @@ Quantum Teams is a recruiter-ready full-stack team task manager: a futuristic Ne
 **Status**: ✅ **READY FOR IMMEDIATE DEPLOYMENT**
 
 - **Backend**: Render (Express.js on Node 20.x)
-- **Frontend**: Railway (Next.js on Node 20.x)
+- **Frontend**: Vercel (Next.js on Node 20.x)
 - **Database**: MongoDB Atlas
 - **Deployment Time**: 5 minutes
 
@@ -27,7 +27,7 @@ Quantum Teams is a recruiter-ready full-stack team task manager: a futuristic Ne
 - Node.js 20.x, Express 5.2.1, MongoDB Atlas, Mongoose 9.6.1
 - JWT authentication (14-day expiration), bcryptjs password hashing
 - Role middleware, Zod validation, Helmet, CORS, rate limiting
-- Railway frontend + Render backend production-ready monorepo
+- Vercel frontend + Render backend production-ready monorepo
 
 ## 📁 Folder Structure
 
@@ -135,12 +135,13 @@ Authorization: Bearer <token>
 
 ## Deployment
 
-Frontend on Railway:
+Frontend on Vercel:
 
-1. Create a Railway web service from this repo.
-2. Use the repo root `railway.json`.
+1. Import the repository into Vercel.
+2. Set the root directory to `web`.
 3. Set:
    - `NEXT_PUBLIC_API_URL=https://your-backend.onrender.com`
+4. Deploy the project.
 
 Backend on Render:
 
@@ -151,7 +152,7 @@ Backend on Render:
    - Start command: `npm start`
    - Health check path: `/health`
 3. Add env vars from `api/.env.example`
-4. Set `CLIENT_URL` to your Railway frontend URL, for example `https://your-frontend.up.railway.app`
+4. Set `CLIENT_URL` to your Vercel frontend URL, for example `https://your-frontend.vercel.app`
 
 Render blueprint:
 

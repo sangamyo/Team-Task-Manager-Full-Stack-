@@ -86,7 +86,7 @@ export function ProjectModal({ open, onClose, editing }: Props) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="glass-panel fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-3xl p-6 shadow-[0_0_80px_rgba(34,211,238,0.15)]"
+            className="glass-panel fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[min(100%-2rem,32rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl p-5 shadow-[0_0_80px_rgba(34,211,238,0.15)] sm:p-6"
           >
             {/* Header */}
             <div className="mb-6 flex items-center justify-between">
@@ -106,7 +106,7 @@ export function ProjectModal({ open, onClose, editing }: Props) {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 pb-1">
               {!isAdmin && (
                 <p className="flex items-center gap-2 rounded-2xl border border-amber-300/20 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
                   <AlertCircle className="size-4" /> Members can view assigned projects only.
