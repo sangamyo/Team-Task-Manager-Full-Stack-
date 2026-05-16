@@ -6,8 +6,8 @@ Quantum Teams is a recruiter-ready full-stack team task manager: a futuristic Ne
 
 **Status**: ✅ **READY FOR IMMEDIATE DEPLOYMENT**
 
-- **Backend**: Railway (Express.js on Node 20.x)
-- **Frontend**: Vercel (Next.js on Node 20.x)
+- **Backend**: Render (Express.js on Node 20.x)
+- **Frontend**: Railway (Next.js on Node 20.x)
 - **Database**: MongoDB Atlas
 - **Deployment Time**: 5 minutes
 
@@ -27,7 +27,7 @@ Quantum Teams is a recruiter-ready full-stack team task manager: a futuristic Ne
 - Node.js 20.x, Express 5.2.1, MongoDB Atlas, Mongoose 9.6.1
 - JWT authentication (14-day expiration), bcryptjs password hashing
 - Role middleware, Zod validation, Helmet, CORS, rate limiting
-- Railway & Vercel production-ready monorepo
+- Railway frontend + Render backend production-ready monorepo
 
 ## 📁 Folder Structure
 
@@ -133,28 +133,32 @@ Send JWTs as:
 Authorization: Bearer <token>
 ```
 
-## Railway Deployment
+## Deployment
 
-Create two Railway services from this repo:
+Frontend on Railway:
 
-1. Web service
-   - Root directory: `web`
-   - Build command: `npm run build`
-   - Start command: `npm run start`
-   - Env: `NEXT_PUBLIC_API_URL=https://your-api.up.railway.app/api`
+1. Create a Railway web service from this repo.
+2. Use the repo root `railway.json`.
+3. Set:
+   - `NEXT_PUBLIC_API_URL=https://your-backend.onrender.com`
 
-2. API service
+Backend on Render:
+
+1. Create a Render web service from this repo.
+2. Set:
    - Root directory: `api`
-   - Builder: `Nixpacks`
    - Build command: `npm install --omit=dev && npm run build`
    - Start command: `npm start`
    - Health check path: `/health`
-   - Env: values from `api/.env.example`
-   - Add MongoDB Atlas or Railway MongoDB-compatible connection string as `MONGODB_URI`
-   - Set `CLIENT_URL` to your frontend URL, for example `https://your-frontend.vercel.app`
+3. Add env vars from `api/.env.example`
+4. Set `CLIENT_URL` to your Railway frontend URL, for example `https://your-frontend.up.railway.app`
+
+Render blueprint:
+
+- A ready-to-use backend blueprint is included in [render.yaml](/Users/hariomkasaundhan/Documents/New%20project%202/render.yaml).
 
 Backend deploy note:
-If Railway says the backend is failing during startup, the most common cause is an invalid `MONGODB_URI`. A bad username, password, or database network rule will fail the API before the health check passes.
+If Render fails during startup, the most common cause is an invalid `MONGODB_URI`. A bad username, password, missing URL encoding, or Atlas network rule will fail the API before the health check passes.
 
 ## Production Notes
 

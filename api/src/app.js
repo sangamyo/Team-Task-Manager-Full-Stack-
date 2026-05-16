@@ -12,16 +12,22 @@ import teamRoutes from "./routes/team.routes.js";
 import { errorHandler, notFound } from "./middleware/error.js";
 
 export const app = express();
+app.set("trust proxy", 1);
 
 // Security and middleware
 app.use(helmet());
 
 // CORS Configuration - Support multiple frontends (localhost, Vercel, Railway)
+const configuredOrigins = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "https://team-management-web-folder-files-22a19oglb.vercel.app",
-  process.env.CLIENT_URL,
+  ...configuredOrigins,
 ].filter(Boolean);
 
 app.use(cors({

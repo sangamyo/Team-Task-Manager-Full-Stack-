@@ -8,7 +8,13 @@ connectDB()
   .then(() => {
     app.listen(port, () => {
       console.log(`✅ API Server listening on port ${port}`);
-      console.log(`📍 URL: ${process.env.NODE_ENV === "production" ? process.env.RAILWAY_PUBLIC_DOMAIN || "https://your-railway-url.up.railway.app" : `http://localhost:${port}`}`);
+      console.log(
+        `📍 URL: ${
+          process.env.NODE_ENV === "production"
+            ? process.env.RENDER_EXTERNAL_URL || `http://0.0.0.0:${port}`
+            : `http://localhost:${port}`
+        }`,
+      );
     });
   })
   .catch((error) => {

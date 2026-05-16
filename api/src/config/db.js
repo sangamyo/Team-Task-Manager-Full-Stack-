@@ -20,7 +20,13 @@ export async function connectDB() {
     });
     console.log("✅ MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ MongoDB connection failed:", error.message);
+    if (error?.message?.includes("bad auth")) {
+      console.error("❌ MongoDB connection failed: authentication error. Check Render MONGODB_URI username, password, and Atlas access.");
+    } else if (error?.message?.includes("ENOTFOUND")) {
+      console.error("❌ MongoDB connection failed: host not found. Check the Atlas host value in MONGODB_URI.");
+    } else {
+      console.error("❌ MongoDB connection failed:", error.message);
+    }
     throw error;
   }
 }
